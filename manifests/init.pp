@@ -112,7 +112,7 @@ class postfix {
             enable => true,
             require => [
                     File["/etc/amavisd/amavisd.conf"],
-                    Package["amavisd"]
+                    Package["amavisd-new"]
                 ]
         }
 
