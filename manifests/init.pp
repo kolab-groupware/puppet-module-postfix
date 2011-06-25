@@ -62,12 +62,12 @@ class postfix {
             group => "root",
             mode => 644,
             source => [
-                    "puppet://$server/private/$environment/postfix/amavisd.conf.$hostname",
-                    "puppet://$server/private/$environment/postfix/amavisd.conf",
-                    "puppet://$server/files/postfix/amavisd.conf.$hostname",
-                    "puppet://$server/files/postfix/amavisd.conf",
-                    "puppet://$server/modules/postfix/amavisd.conf.$hostname",
-                    "puppet://$server/modules/postfix/amavisd.conf"
+                    "puppet://$server/private/$environment/postfix/amavisd/amavisd.conf.$hostname",
+                    "puppet://$server/private/$environment/postfix/amavisd/amavisd.conf",
+                    "puppet://$server/files/postfix/amavisd/amavisd.conf.$hostname",
+                    "puppet://$server/files/postfix/amavisd/amavisd.conf",
+                    "puppet://$server/modules/postfix/amavisd/amavisd.conf.$hostname",
+                    "puppet://$server/modules/postfix/amavisd/amavisd.conf"
                 ],
             require => Package["amavisd-new"],
             notify => Service["amavisd"]
@@ -78,12 +78,28 @@ class postfix {
             group => "root",
             mode => 644,
             source => [
-                    "puppet://$server/private/$environment/postfix/clamd.conf.$hostname",
-                    "puppet://$server/private/$environment/postfix/clamd.conf",
-                    "puppet://$server/files/postfix/clamd.conf.$hostname",
-                    "puppet://$server/files/postfix/clamd.conf",
-                    "puppet://$server/modules/postfix/clamd.conf.$hostname",
-                    "puppet://$server/modules/postfix/clamd.conf"
+                    "puppet://$server/private/$environment/postfix/amavisd/clamd.conf.$hostname",
+                    "puppet://$server/private/$environment/postfix/amavisd/clamd.conf",
+                    "puppet://$server/files/postfix/amavisd/clamd.conf.$hostname",
+                    "puppet://$server/files/postfix/amavisd/clamd.conf",
+                    "puppet://$server/modules/postfix/amavisd/clamd.conf.$hostname",
+                    "puppet://$server/modules/postfix/amavisd/clamd.conf"
+                ],
+            require => Package["clamd"],
+            notify => Service["clamd.amavisd"]
+        }
+
+        file { "/etc/sysconfig/clamd":
+            owner => "root",
+            group => "root",
+            mode => 644,
+            source => [
+                    "puppet://$server/private/$environment/postfix/amavisd/clamd.sysconfig.$hostname",
+                    "puppet://$server/private/$environment/postfix/amavisd/clamd.sysconfig",
+                    "puppet://$server/files/postfix/amavisd/clamd.sysconfig.$hostname",
+                    "puppet://$server/files/postfix/amavisd/clamd.sysconfig",
+                    "puppet://$server/modules/postfix/amavisd/clamd.sysconfig.$hostname",
+                    "puppet://$server/modules/postfix/amavisd/clamd.sysconfig"
                 ],
             require => Package["clamd"],
             notify => Service["clamd.amavisd"]
@@ -110,6 +126,7 @@ class postfix {
             enable => true,
             require => [
                     File["/etc/clamd.d/amavisd.conf"],
+                    File["/etc/sysconfig/clamd"],
                     Package["clamd"]
                 ]
         }
