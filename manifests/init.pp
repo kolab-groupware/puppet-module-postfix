@@ -51,11 +51,6 @@ class postfix {
             ]
     }
 
-    service { "amavisd":
-        ensure => running,
-        enable => true
-    }
-
     class amavisd inherits postfix {
         file { "/etc/amavisd/amavisd.conf":
             owner => "root",
