@@ -160,7 +160,7 @@ class postfix {
             owner => "root",
             group => "root",
             recurse => true,
-            purge => true,
+            purge => false,
             force => true,
             require => Package["postfix"],
             notify => Service["postfix"],
