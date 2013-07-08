@@ -174,10 +174,5 @@ class postfix {
                 ]   
         }
 
-        Service["postfix"] {
-            require +> [
-                    File["/etc/postfix/mailman/"]
-                ]
-        }
     }
 }
