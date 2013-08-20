@@ -156,4 +156,26 @@ class postfix {
                 ]
         }
     }
+
+    class mailman inherits postfix {
+
+            file { "/etc/postfix/mailman/":
+            owner => "root",
+            group => "root",
+            recurse => true,
+            purge => false,
+            force => true,
+            require => Package["postfix"],
+            notify => Service["postfix"],
+            source => [
+                    "puppet://$server/private/$environment/postfix/mailman.$hostname/",
+                    "puppet://$server/private/$environment/postfix/mailman/",
+                    "puppet://$server/files/postfix/mailman.$hostname/",
+                    "puppet://$server/files/postfix/mailman/",
+                    "puppet://$server/modules/postfix/mailman.$hostname/",
+                    "puppet://$server/modules/postfix/mailman/"
+                ]   
+        }
+
+    }
 }
