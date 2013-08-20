@@ -36,8 +36,11 @@ class postfix {
         ensure => installed
     }
 
-    package { "sendmail":
-        ensure => purged,
+    package { [
+            "sendmail",
+            "sendmail-cf"
+        ]:
+        ensure => absent,
         require => Package["postfix"]
     }
 
