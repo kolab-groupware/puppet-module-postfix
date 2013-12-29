@@ -1,23 +1,17 @@
-class postfix($template = false) {
+class postfix {
 
     file { "/etc/postfix/main.cf":
         owner => "root",
         group => "root",
         mode => 644,
-        source => $template ? {
-                false => [
-                        "puppet://$server/private/$environment/postfix/main.cf.$hostname",
-                        "puppet://$server/private/$environment/postfix/main.cf",
-                        "puppet://$server/files/postfix/main.cf.$hostname",
-                        "puppet://$server/files/postfix/main.cf",
-                        "puppet://$server/modules/postfix/main.cf.$hostname",
-                        "puppet://$server/modules/postfix/main.cf"
-                    ]
-            },
-        content => $template ? {
-                false => undef,
-                default => template("$template"),
-            },
+        source => [
+                "puppet://$server/private/$environment/postfix/main.cf.$hostname",
+                "puppet://$server/private/$environment/postfix/main.cf",
+                "puppet://$server/files/postfix/main.cf.$hostname",
+                "puppet://$server/files/postfix/main.cf",
+                "puppet://$server/modules/postfix/main.cf.$hostname",
+                "puppet://$server/modules/postfix/main.cf"
+            ],
         require => Package["postfix"],
         notify => Service["postfix"]
     }
