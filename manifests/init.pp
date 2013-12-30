@@ -179,10 +179,10 @@ class postfix {
 
     }
 
-    class template inherits postfix {
+    class template($template = "postfix/main.cf.erb") inherits postfix {
         File["/etc/postfix/main.cf"] {
             source => undef,
-            content => template("postfix/main.cf.erb")
+            content => template("$template")
         }
     }
 }
