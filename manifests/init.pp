@@ -3,7 +3,7 @@ class postfix {
     file { "/etc/postfix/main.cf":
         owner => "root",
         group => "root",
-        mode => 644,
+        mode => "644",
         source => [
                 "puppet://$server/private/$environment/postfix/main.cf.$hostname",
                 "puppet://$server/private/$environment/postfix/main.cf",
@@ -19,7 +19,7 @@ class postfix {
     file { "/etc/postfix/master.cf":
         owner => "root",
         group => "root",
-        mode => 644,
+        mode => "644",
         source => [
                 "puppet://$server/private/$environment/postfix/master.cf.$hostname",
                 "puppet://$server/private/$environment/postfix/master.cf",
@@ -58,7 +58,7 @@ class postfix {
         file { "/etc/amavisd/amavisd.conf":
             owner => "root",
             group => "root",
-            mode => 644,
+            mode => "644",
             source => [
                     "puppet://$server/private/$environment/postfix/amavisd/amavisd.conf.$hostname",
                     "puppet://$server/private/$environment/postfix/amavisd/amavisd.conf",
@@ -74,7 +74,7 @@ class postfix {
         file { "/etc/clamd.d/amavisd.conf":
             owner => "root",
             group => "root",
-            mode => 644,
+            mode => "644",
             source => [
                     "puppet://$server/private/$environment/postfix/amavisd/clamd.conf.$hostname",
                     "puppet://$server/private/$environment/postfix/amavisd/clamd.conf",
@@ -90,7 +90,7 @@ class postfix {
         file { "/etc/sysconfig/clamd":
             owner => "root",
             group => "root",
-            mode => 644,
+            mode => "644",
             source => [
                     "puppet://$server/private/$environment/postfix/amavisd/clamd.sysconfig.$hostname",
                     "puppet://$server/private/$environment/postfix/amavisd/clamd.sysconfig",
